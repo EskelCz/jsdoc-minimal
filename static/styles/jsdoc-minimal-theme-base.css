@@ -308,6 +308,10 @@ h4.name {
     line-height: 1.35;
 }
 
+h3.name {
+    font-size: clamp(1.1rem, 1rem + 0.45vw, 1.45rem);
+}
+
 .params,
 .props,
 table {
@@ -533,14 +537,20 @@ code {
     align-items: center;
     border-radius: 999px;
     display: inline-flex;
-    height: 1.5rem;
+    height: 1.75rem;
     justify-content: center;
-    width: 1.5rem;
+    width: 1.75rem;
 }
 
 .project-link .fa.fa-github {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     line-height: 1;
+}
+
+.project-link a:hover,
+.project-link a:focus,
+.project-link a:active {
+    text-decoration: none;
 }
 
 .sidebar-items-container {
@@ -877,33 +887,6 @@ pre {
     align-items: flex-start;
 }
 
-.search-container .wrapper {
-    width: 100%;
-    max-width: 60rem;
-    padding: 4rem 2rem 2rem;
-    border-radius: 1rem;
-    margin: 3rem calc(var(--toc-width) + var(--toc-offset) + 2rem) 0 calc(var(--sidebar-width) + 1rem);
-    position: relative
-}
-
-.search-close-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem
-}
-
-.search-result-c-text {
-    display: flex;
-    justify-content: center;
-    user-select: none;
-}
-
-.search-result-c {
-    min-height: 20rem;
-    max-height: 40rem;
-    overflow: auto;
-    padding: 2rem 0
-}
 
 .search-box-c {
     width: 100%;

@@ -46,11 +46,14 @@ h6 {
 }
 
 .project-link a {
-    color: #8f8a7f;
+    color: #8e8a81;
 }
 
-.project-link a:hover {
-    color: #b7b1a4;
+.project-link a:hover,
+.project-link a:focus,
+.project-link a:active {
+    color: #a29d92;
+    text-decoration: none;
 }
 
 .sidebar-section-title {
@@ -70,7 +73,16 @@ h6 {
 }
 
 .sidebar-section-children.active {
-    background: #343430;
+    background: transparent;
+}
+
+.sidebar-section-children.active a {
+    color: #f8f8f3;
+    font-weight: 700;
+}
+
+.sidebar-section-children.active a:hover {
+    background: transparent;
 }
 
 .sidebar-section-children a:hover {
@@ -122,17 +134,27 @@ h6 {
 }
 
 .toc-link {
-    color: #807b71;
+    color: #8e8a81;
     font-size: 0.875rem;
     transition: color 0.3s;
 }
 
 .toc-link.is-active-link {
-    color: #f8f8f3;
+    color: #a29d92;
+    text-decoration: none;
 }
 
 .has-anchor .link-anchor {
-    color: #555;
+    background: transparent;
+}
+
+.sidebar-section-children.active a {
+    color: #f8f8f3;
+    font-weight: 700;
+}
+
+.sidebar-section-children.active a:hover {
+    background: transparent;
 }
 
 .has-anchor .link-anchor:hover {

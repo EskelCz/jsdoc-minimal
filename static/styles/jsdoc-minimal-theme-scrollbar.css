@@ -18,11 +18,11 @@
 }
 
 
-.light ::-webkit-scrollbar-track {
+body.light::-webkit-scrollbar-track {
     background: #ddd;
 }
 
-.light ::-webkit-scrollbar-thumb {
+body.light::-webkit-scrollbar-thumb {
     background: #aaa;
     outline: 0.06125rem solid #aaa;
 }
