@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<?js
+  if (this.layoutOptions.wantDate) {
+    Date.prototype.toLongDate =
+      function (locale) {
+        return new Date().toLocaleDateString(locale || 'en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+      }
+  }
+?>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="generator" content="jsdoc v<?js= env.version.number ?>">
+    <?js if (this.meta.length) { ?>
+      <?js this.meta.forEach(function(src){ ?>
+        <meta <?js=Object.keys(src).map(key => `${key}="${src[key]}"`).join(" ") ?>>
+      <?js }) ?>
+    <?js } ?>
+    <title>
+      <?js if (this.project !== undefined && this.project.title !== undefined) { ?>
+      <?js= this.project.title ?> | <?js= title ?>
+      <?js } else { ?>
+      <?js= title ?>
+      <?js } ?>
+    </title>
+    <?js if (!this.layoutOptions.noTOC) { ?>
+    <link type="text/css" rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
+    <?js } ?>
+    <link type="text/css" rel="stylesheet" media="screen" href="styles/jsdoc-minimal-theme-base.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="styles/jsdoc-minimal-theme-scrollbar.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="styles/jsdoc-minimal-colorscheme.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="styles/jsdoc-minimal-theme-light.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="styles/jsdoc-minimal-theme-dark.css">
+    <script>
+      var baseURL = "/"
+      var locationPathname = ""
+
+      // Global variables
+      <?js if (this.baseURL) { ?>
+        baseURL = "<?js= this.baseURL ?>"
+        baseURL = baseURL.replace(/https?:\/\//i, '')
+        baseURL = baseURL.substr(baseURL.indexOf("/"))
+      <?js } else { ?>
+        locationPathname = document.location.pathname
+        baseURL = locationPathname.substr(0, locationPathname.lastIndexOf("/") + 1)
+      <?js } ?>
+    </script>
+    <?js if(this.layoutOptions.themeName.toLowerCase() === 'dynamic') { ?>
+    <script>
+      if (window.matchMedia) {
+        var styles = Array.prototype.slice.call(document.querySelectorAll('link[rel="stylesheet"]'))
+        var themes = styles.filter(function(s) { return /(theme).*(light|dark).*\.css$/i.test(s.href) })
+        if (themes) {
+          themes.forEach(function(t) {
+            if (matchMedia('(prefers-color-scheme: dark)').matches) {
+              t.media = t.href.split(/\W/).indexOf('light') > -1 ? 'print' : 'screen'
+              localStorage.setItem('theme', 'dark');
+            }
+            else if (localStorage.getItem('theme') !== 'dark') {
+              t.media = t.href.split(/\W/).indexOf('dark') > -1 ? 'print' : 'screen'
+              localStorage.setItem('theme', 'light');
+            }
+          })
+
+          document.addEventListener("DOMContentLoaded", function () {
+            var inactive = themes.filter(function(t) { return t.media === 'print' })[0]
+            var themeId = document.getElementById('jsdoc-minimal-theme')
+            if (themeId && inactive)
+              themeId.innerText = inactive.href.split(/\W/).indexOf('light') > -1 ? 'dark' : 'light'
+          })
+        }
+      }
+    </script>
+    <?js } ?>
+
+    <?js if(this.layoutOptions.wantOverlay) { ?>
+    <link type="text/css" rel="stylesheet" media="screen" href="styles/third-party/overlayscrollbars.min.css">
+    <?js } ?>
+
+    <?js if(this.externalAssets.length) { ?>
+      <?js this.externalAssets.forEach(src => { ?>
+        <link <?js=Object.keys(src).map(key => `${key}="${this.layoutOptions.toAssetLink(src)[key]}"`).join(" ") ?>>
+      <?js }) ?>
+    <?js } ?>
+
+    <?js if(this.staticStyles.length) { ?>
+      <?js this.staticStyles.forEach(function(source){ ?>
+        <link type="text/css" rel="stylesheet" href="<?js= source ?>">
+      <?js }) ?>
+    <?js } ?>
+
+    <?js if (this.layoutOptions.hideLangNames) { ?>
+      <style>
+        .code-lang-name  {
+            display: none;
+        }
+        .readme code {
+            margin: 0;
+        }
+      </style>
+    <?js } ?>
+
+    <?js if (this.inlineStyle !== undefined ) { ?>
+    <style>
+      <?js= this.inlineStyle ?>
+    </style>
+    <?js } ?>
+
+    <?js if (!this.layoutOptions.noTOC) { ?>
+    <style>
+        @media screen and (max-width: 100em) {
+            .toc-container {
+                display: none
+            }
+        }
+    </style>
+    <?js } else { ?>
+    <style>
+        .main-content {
+            padding: 7rem 0 0 25rem !important;
+        }
+    </style>
+    <?js } ?>
+
+    <?js if(this.externalScripts.length) { ?>
+      <?js this.externalScripts.forEach(function(src){ ?>
+        <script <?js=Object.keys(src).map(key => `${key}="${src[key]}"`).join(" ")?>></script>
+      <?js }) ?>
+    <?js } ?>
+
+    <?js if(this.staticScripts.length) { ?>
+        <?js this.staticScripts.forEach(function(source){ ?>
+        <script src="<?js= source ?>"></script>
+        <?js }) ?>
+    <?js } ?>
+</head>
+<body class="<?js= this.theme ?>" data-theme="<?js= this.theme ?>">
+<?js= this.partial('icons.tmpl') ?>
+
+<div class="sidebar-container">
+  <?js= this.partial('sidebar.tmpl') ?>
+</div>
+
+<div class="navbar-container" id="VuAckcnZhf">
+  <?js= this.partial('navbar.tmpl') ?>
+</div>
+
+<?js if (!this.layoutOptions.noTOC) { ?>
+<div class="toc-container">
+  <?js= this.partial('toc.tmpl') ?>
+</div>
+<?js } ?>
+
+<div class="body-wrapper">
+  <div class="main-content">
+    <div class="main-wrapper">
+      <?js= content ?>
+      <footer class="footer" id="PeOAagUepe">
+        <div class="wrapper">
+  <?js if (this.footer) { ?>
+  <?js= this.footer ?>
+  <?js } else { ?>
+  Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc <?js= env.version.number ?></a><?js if(this.layoutOptions.wantDate) { ?> on <?js= (new Date().toLongDate()) ?><?js } ?> using the <a href="https://github.com/EskelCz/jsdoc-minimal">jsdoc-minimal</a> <span id="jsdoc-minimal-theme"><?js= this.layoutOptions.themeName ?></span> theme.
+  <?js } ?>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<?js if(this.navbar.search) { ?>
+<?js= this.partial('search.tmpl')?>
+<?js } ?>
+
+<?js= this.partial('mobile-sidebar.tmpl') ?>
+
+<?js if(this.navbar.search) { ?>
+<script> var baseURL = "<?js= this.baseURL ?>" </script>
+<script src="scripts/search.js" defer></script>
+<script src="scripts/third-party/fuse.js" defer></script>
+<?js } ?>
+
+<?js if(this.layoutOptions.wantOverlay) { ?>
+<script src="scripts/third-party/overlayscrollbars.browser.es6.min.js"></script>
+<script>
+  var options = JSON.parse('<?js= this.overlayScrollbar ?>')
+  var optString = (function f(o) {
+    var optList =
+      Object.keys(o).reduce(
+        (function (a, k) { a.push([k, o[k]]); return a }), []);
+    return (optList.reduce(
+      (function (str, e) {
+        if (typeof (e[1]) === 'object')
+          return str += e[0] + ': { ' + f(e[1]) + ' }, ';
+        else
+          return str += [e[0]] + ': ' + e[1] + ', ';
+      }), '').slice(0, -2))
+  })(options)
+  console.log('Loaded OverlayScrollbars.js with options:', optString || 'none')
+  document.addEventListener("DOMContentLoaded", function () {
+      OverlayScrollbarsGlobal.OverlayScrollbars(document.body, options)
+  })
+</script>
+<?js } ?>
+
+<script>
+    function replaceIcon() {
+        var metaField = document.querySelector('.gh-meta')
+        var iconField = document.querySelector('.gh-meta p ~ p')
+        var icon = document.querySelector('.fa.fa-github')
+        icon.style.fontSize = 'initial'
+        icon.style.display = 'inline-block'
+        icon.style.margin = '1rem 0'
+        icon.style. padding = "0 .75em"
+        icon.style.fontWeight = 700
+        icon.innerText = 'Homepage'
+        iconField.style.margin = '0'
+    }
+
+    var fa = document.createElement('link')
+    fa.href = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
+    fa.rel = 'stylesheet'
+    fa.type = 'text/css'
+    fa.onerror = replaceIcon
+    var style = document.getElementsByTagName('link')[0]
+    style.parentNode.insertBefore(fa, style)
+    // hide emoji markup when not publishing to GitHub
+    var warnIcon = document.querySelector('.fa.fa-warning')
+    if (warnIcon) warnIcon.innerText = ''
+</script>
+<script src="scripts/third-party/popper.js" defer></script>
+<script src="scripts/third-party/tippy.js" defer></script>
+<script src="scripts/third-party/tocbot.js"></script>
+<script src="scripts/third-party/prettify.min.js"></script>
+<script src="scripts/third-party/lang-css.js"></script>
+<script src="scripts/linenumber.js" defer></script>
+<script src="scripts/core.js"></script>
+<?js if (!this.layoutOptions.noTOC) { ?>
+<script>
+  var tocbotInstance = tocbot.init({
+    tocSelector: '#eed4d2a0bfd64539bb9df78095dec881',
+    contentSelector: '.main-content',
+    headingSelector: 'h1, h2, h3',
+    hasInnerContainers: true,
+    scrollContainer: '.main-content',
+    headingsOffset: 130,
+    onClick: bringLinkToView
+  });
+
+</script>
+<?js } ?>
+</body>
+</html>

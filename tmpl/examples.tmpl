@@ -1,0 +1,40 @@
+<?js
+    function escape (txt) {
+        return txt.replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+    }
+    var data = obj;
+    var self = this;
+    var codepen = this.codepen;
+
+    data.forEach(function(example) {
+        if (example.caption) {
+    ?>
+        <p class="code-caption"><?js= example.caption ?></p>
+    <?js } ?>
+    <pre class="prettyprint source"><code><?js= self.htmlsafe(example.code) ?></code></pre>
+    <?js
+           if (codepen) {
+            var jsonString = escape(JSON.stringify(example.code));
+            var options = codepen.options || {};
+            var optionsString = '';
+            var optionsKey = Object.keys(options).filter((key) => key !== 'js' );
+            if (optionsKey.length) {
+                optionsString += ', ';
+                optionsKey.map((key, idx) => {
+                    optionsString += `"${key}": "${options[key].replace(/"/g, "&quot;").replace(/'/g, "&apos;")}"`;
+                    if(idx !== optionsKey.length - 1) {
+                        optionsString += ','
+                    }
+                });
+            }
+    ?>
+        <div class="codepen-data" style="display:none">
+            <input type="hidden" name="data" value='{"title": "<?js= example.caption || 'Example' ?>", "js": <?js= jsonString ?><?js= optionsString ?> }' />
+            <button class="icon-button codepen-button" type="submit" value="Edit on CodePen" aria-label="Edit on CodePen">
+                <svg><use xlink:href="#codepen-icon"></use></svg>
+            </button>
+        </div>
+    <?js } ?>
+<?js
+    });
+?>

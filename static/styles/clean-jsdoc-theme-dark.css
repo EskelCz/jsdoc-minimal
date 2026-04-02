@@ -1,0 +1,307 @@
+::selection {
+    background: #ffce76;
+    color: #222;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+a,
+a:active,
+a:focus {
+    color: #00abff;
+}
+
+.gh-meta p~p a:hover {
+    color: #f8f8f9;
+}
+
+hr {
+    border: 1px solid #333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #fff;
+}
+
+.sidebar {
+    background-color: #222;
+    color: #999;
+}
+
+.sidebar-title {
+    color: #999;
+}
+
+.sidebar-section-title {
+    color: #999;
+}
+
+.sidebar-section-title:hover {
+    background: #252525;
+}
+
+.with-arrow {
+    fill: #999;
+}
+
+.sidebar-section-children-container {
+    background: #292929;
+}
+
+.sidebar-section-children.active {
+    background: #444;
+}
+
+.sidebar-section-children a:hover {
+    background: #2c2c2c;
+}
+
+.sidebar-section-children a {
+    color: #fff;
+}
+
+.navbar-container {
+    background: #1a1a1a;
+}
+
+.icon-button svg,
+.navbar-item a {
+    color: #999;
+    fill: #999;
+}
+
+.font-size-tooltip .icon-button svg {
+    fill: #fff;
+}
+
+.font-size-tooltip .icon-button.disabled {
+    background: #999;
+}
+
+.icon-button:hover {
+    background: #333;
+}
+
+.icon-button:active {
+    background: #444;
+}
+
+.navbar-item a:active {
+    background-color: #222;
+    color: #aaa;
+}
+
+.navbar-item:hover {
+    background: #202020;
+}
+
+.footer {
+    color: #999;
+}
+
+.toc-link {
+    color: #777;
+    font-size: 0.875rem;
+    transition: color 0.3s;
+}
+
+.toc-link.is-active-link {
+    color: #fff;
+}
+
+.has-anchor .link-anchor {
+    color: #555;
+}
+
+.has-anchor .link-anchor:hover {
+    color: #888;
+}
+
+.signature-attributes {
+    color: #aaa;
+}
+
+.ancestors {
+    color: #999;
+}
+
+.ancestors a {
+    color: #999 !important;
+}
+
+.important {
+    color: #ff2706;
+}
+
+.type-signature {
+    color: #00918e;
+}
+
+.name,
+.name>a {
+    color: #f7f7f7;
+}
+
+.details {
+    background: #222;
+    color: #fff;
+}
+
+.prettyprint {
+    background: #222;
+}
+
+.member-item-container strong,
+.method-member-container strong {
+    color: #fff;
+}
+
+.pre-top-bar-container {
+    background: #292929;
+}
+
+/* stylelint-disable */
+.prettyprint.source,
+.prettyprint code {
+    background-color: #222;
+}
+
+.pre-div {
+    background-color: #222;
+}
+
+/* stylelint-enable */
+.hljs .hljs-ln-numbers {
+    color: #777;
+}
+
+.hljs .selected {
+    background: #444;
+}
+
+.hljs .selected .hljs-ln-numbers {
+    color: #eee;
+}
+
+table .name,
+.params .name,
+.props .name,
+.name code {
+    color: #fff;
+}
+
+table td,
+.params td {
+    background-color: #292929;
+}
+
+table thead th,
+.params thead th,
+.props thead th {
+    background-color: #222;
+    color: #fff;
+}
+
+table .params thead tr,
+.params .params thead tr,
+.props .props thead tr {
+    background-color: #222;
+    color: #fff;
+}
+
+.disabled {
+    color: #aaa;
+}
+
+.code-lang-name {
+    color: #ff8a00;
+}
+
+.tooltip {
+    background: #ffce76;
+    color: #222;
+}
+
+blockquote {
+    background: #222;
+    color: #fff;
+}
+
+.search-container {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 4px 4px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.icon-button.search-close-button svg {
+    fill: #f8f8f9;
+}
+
+.search-container .wrapper {
+    background: #222;
+}
+
+.search-result-c {
+    color: #666;
+}
+
+.search-box-c {
+    fill: #333;
+}
+
+.search-input {
+    background: #333;
+    color: #fff;
+}
+
+.search-box-c svg {
+    fill: #fff;
+}
+
+.search-result-item {
+    background: #333;
+}
+
+.search-result-item:hover {
+    background: #444;
+}
+
+.search-result-item:active {
+    background: #555;
+}
+
+.search-result-item-title {
+    color: #fff;
+}
+
+.search-result-item-p {
+    color: #aaa;
+}
+
+.mobile-menu-icon-container .icon-button {
+    background: #333;
+}
+
+.mobile-sidebar-container {
+    background: #1a1a1a;
+}
+
+.mobile-sidebar-wrapper {
+    background: #222;
+}
+
+.child-tutorial {
+    border-color: #555;
+    color: #f3f3f3;
+}
+
+.child-tutorial:hover {
+    background: #222;
+}
