@@ -657,6 +657,21 @@ code {
     text-decoration: none;
 }
 
+.sidebar-section-group {
+    margin-top: 0.5rem;
+    padding: 0.15rem 0.75rem;
+}
+
+.sidebar-group-title {
+    display: block;
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    opacity: 0.72;
+    text-transform: uppercase;
+}
+
 .sidebar-section-children.active a,
 .sidebar-section-children.active a:hover,
 .sidebar-section-children.active a:focus,

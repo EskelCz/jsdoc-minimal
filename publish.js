@@ -449,6 +449,143 @@ function buildSidebarMembers({ items, itemHeading, itemsSeen, linktoFn, sectionN
     return navProps;
 }
 
+function normalizePathForSidebar(inputPath = '') {
+    return String(inputPath).replace(/\\/gu, '/').replace(/^\.\//u, '');
+}
+
+function getClassMenuConfig() {
+    const defaults = {
+        'groupByDir': false,
+        'sourceRoot': 'src',
+        'pinned': []
+    };
+
+    const provided = themeOpts.class_menu && typeof themeOpts.class_menu === 'object' ? themeOpts.class_menu : {};
+
+    return {
+        ...defaults,
+        ...provided,
+        'pinned': Array.isArray(provided.pinned) ? provided.pinned : defaults.pinned
+    };
+}
+
+function getSourceParts(item, sourceRoot = 'src') {
+    if (!item || !item.meta) {
+        return {
+            'group': null,
+            'filename': '',
+            'isTopLevel': true
+        };
+    }
+
+    const sourcePath = item.meta.path && item.meta.path !== 'null' ?
+        path.join(item.meta.path, item.meta.filename || '') :
+        (item.meta.filename || '');
+
+    const normalizedSourcePath = normalizePathForSidebar(sourcePath);
+    const normalizedSourceRoot = normalizePathForSidebar(sourceRoot).replace(/^\/+/u, '').replace(/\/+$/u, '');
+    const rootPrefix = `${normalizedSourceRoot}/`;
+    const sourceRootPattern = new RegExp(`(?:^|/)${normalizedSourceRoot}/`, 'u');
+    let relativePath = normalizedSourcePath;
+
+    if (normalizedSourcePath.startsWith(rootPrefix)) {
+        relativePath = normalizedSourcePath.slice(rootPrefix.length);
+    } else {
+        const match = sourceRootPattern.exec(normalizedSourcePath);
+
+        if (match) {
+            relativePath = normalizedSourcePath.slice(match.index + match[0].length);
+        }
+    }
+    const pathParts = relativePath.split('/').filter(Boolean);
+
+    if (pathParts.length <= 1) {
+        return {
+            'group': null,
+            'filename': pathParts[0] || item.meta.filename || '',
+            'isTopLevel': true
+        };
+    }
+
+    return {
+        'group': pathParts[0],
+        'filename': pathParts[pathParts.length - 1],
+        'isTopLevel': false
+    };
+}
+
+function buildClassSidebarBySource({ items, itemHeading, itemsSeen, linktoFn }) {
+    const navProps = {
+        'name': itemHeading,
+        'items': [],
+        'id': `sidebar-${itemHeading.toLowerCase()}`,
+    };
+    const options = getClassMenuConfig();
+    const topLevel = [];
+    const grouped = {};
+
+    items.forEach(item => {
+        if (hasOwnProp.call(itemsSeen, item.longname)) {
+            return;
+        }
+
+        const sourceParts = getSourceParts(item, options.sourceRoot);
+        const entry = {
+            'name': item.name,
+            'anchor': linktoFn(item.longname, item.name),
+            'children': [],
+            'filename': sourceParts.filename,
+            'isPinned': options.pinned.includes(item.name)
+        };
+
+        itemsSeen[item.longname] = true;
+
+        if (!options.groupByDir || sourceParts.isTopLevel) {
+            topLevel.push(entry);
+
+            return;
+        }
+
+        grouped[sourceParts.group] = grouped[sourceParts.group] || [];
+        grouped[sourceParts.group].push(entry);
+    });
+
+    topLevel.sort((a, b) => {
+        if (a.isPinned !== b.isPinned) {
+            return a.isPinned ? -1 : 1;
+        }
+
+        if (a.filename === 'main.js' && b.filename !== 'main.js') {
+            return -1;
+        }
+
+        if (b.filename === 'main.js' && a.filename !== 'main.js') {
+            return 1;
+        }
+
+        return a.name.localeCompare(b.name);
+    });
+
+    navProps.items.push(...topLevel);
+
+    Object.keys(grouped)
+        .sort((a, b) => a.localeCompare(b))
+        .forEach(group => {
+            navProps.items.push({
+                'anchor': `<span class="sidebar-group-title">${group}</span>`,
+                'isGroup': true
+            });
+
+            grouped[group]
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .forEach(entry => {
+                    navProps.items.push(entry);
+                });
+        });
+
+    return navProps;
+}
+
 function buildSearchListForData() {
     data().each(item => {
         if (item.kind !== 'package' && !item.inherited) {
@@ -527,13 +664,20 @@ function buildSidebar(members) {
             'sectionName': SECTION_TYPE.Modules
         }),
 
-        [SECTION_TYPE.Classes]: buildSidebarMembers({
-            'itemHeading': 'Classes',
-            'items': members.classes,
-            'itemsSeen': seen,
-            'linktoFn': linkto,
-            'sectionName': SECTION_TYPE.Classes
-        }),
+        [SECTION_TYPE.Classes]: getClassMenuConfig().groupByDir ?
+            buildClassSidebarBySource({
+                'itemHeading': 'Classes',
+                'items': members.classes,
+                'itemsSeen': seen,
+                'linktoFn': linkto
+            }) :
+            buildSidebarMembers({
+                'itemHeading': 'Classes',
+                'items': members.classes,
+                'itemsSeen': seen,
+                'linktoFn': linkto,
+                'sectionName': SECTION_TYPE.Classes
+            }),
 
         [SECTION_TYPE.Externals]: buildSidebarMembers({
             'itemHeading': 'Externals',

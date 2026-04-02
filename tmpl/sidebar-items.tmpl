@@ -14,7 +14,7 @@
 
                 <?js 
                 section.items.forEach(function(item) { ?>
-                    <div class="sidebar-section-children">
+                    <div class="sidebar-section-children<?js= item.isGroup ? ' sidebar-section-group' : '' ?>">
                         <?js= item.anchor ?>
                     </div>
                     
