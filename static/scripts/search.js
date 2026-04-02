@@ -5,6 +5,7 @@ const searchWrapper = document.querySelector('#iCxFxjkHbP');
 const searchCloseButton = document.querySelector('#VjLlGakifb');
 const searchInput = document.querySelector('#vpcKVYIppa');
 const resultBox = document.querySelector('#fWwVHRuDuN');
+let searchDataPromise;
 
 function showResultText(text) {
   resultBox.innerHTML = `<span class="search-result-c-text">${text}</span>`;
@@ -53,15 +54,34 @@ function showSearch() {
   }
 }
 
+function getSearchDataUrl() {
+  const script = document.querySelector('script[src*="scripts/search.js"]');
+
+  if (script) {
+    const scriptUrl = new URL(script.getAttribute('src'), window.location.href);
+
+    return new URL('../data/search.json', scriptUrl);
+  }
+
+  return new URL('data/search.json', window.location.href);
+}
+
 async function fetchAllData() {
-  const { hostname, protocol, port, pathname } = location;
+  if (!searchDataPromise) {
+    const url = getSearchDataUrl();
 
-  const base = `${protocol}//${hostname}${port !== '' ? `:${port}` : ''}`;
-  const url = new URL('data/search.json', pathname !== '' ? `${base}${pathname}` : base);
-  const result = await fetch(url);
-  const { list } = await result.json();
+    searchDataPromise = fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Unable to fetch search index from ${url.href}`);
+        }
 
-  return list;
+        return response.json();
+      })
+      .then(payload => payload.list || []);
+  }
+
+  return searchDataPromise;
 }
 
 function onClickSearchItem(event) {
@@ -152,35 +172,36 @@ function debounce(func, wait, immediate) {
   };
 }
 
-function search(event) {
+async function search(event) {
   const { value } = event.target;
   const keys = ['title', 'description'];
-  let result = [];
 
   if (!resultBox) {
     return;
   }
 
-  if (!value) {
+  if (!value.trim()) {
     showResultText('Type anything to view search result');
 
     return;
   }
 
+  showResultText('Loading...');
+
+  try {
+    const data = await fetchAllData();
+    const result = getSearchResult(data, keys, value);
+
     if (!result.length) {
-    showResultText('Loading...');
+      showResultText('No result found! Try some different combination.');
 
-    fetchAllData().then(data => {
-      result = getSearchResult(data, keys, value);
-      if (!result.length) {
-        showResultText('No result found! Try some different combination.');
+      return;
+    }
 
-        return;
-      }
-      resultBox.innerHTML = buildSearchResult(result);
-    }).catch(_ => {
-      showResultText('Failed to load result.');
-    });
+    resultBox.innerHTML = buildSearchResult(result);
+  } catch (error) {
+    console.error('[jsdoc-minimal search] Search failed:', error);
+    showResultText('Failed to load result.');
   }
 }
 

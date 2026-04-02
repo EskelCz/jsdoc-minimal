@@ -56,17 +56,17 @@
       if (window.matchMedia) {
         var styles = Array.prototype.slice.call(document.querySelectorAll('link[rel="stylesheet"]'))
         var themes = styles.filter(function(s) { return /(theme).*(light|dark).*\.css$/i.test(s.href) })
+        var persistedTheme = localStorage.getItem('theme')
+        var preferredTheme = persistedTheme === 'light' || persistedTheme === 'dark'
+          ? persistedTheme
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+
         if (themes) {
           themes.forEach(function(t) {
-            if (matchMedia('(prefers-color-scheme: dark)').matches) {
-              t.media = t.href.split(/\W/).indexOf('light') > -1 ? 'print' : 'screen'
-              localStorage.setItem('theme', 'dark');
-            }
-            else if (localStorage.getItem('theme') !== 'dark') {
-              t.media = t.href.split(/\W/).indexOf('dark') > -1 ? 'print' : 'screen'
-              localStorage.setItem('theme', 'light');
-            }
+            t.media = t.href.split(/\W/).indexOf(preferredTheme === 'dark' ? 'light' : 'dark') > -1 ? 'print' : 'screen'
           })
+
+          localStorage.setItem('theme', preferredTheme)
 
           document.addEventListener("DOMContentLoaded", function () {
             var inactive = themes.filter(function(t) { return t.media === 'print' })[0]
