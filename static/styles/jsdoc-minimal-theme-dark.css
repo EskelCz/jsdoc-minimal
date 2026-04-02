@@ -37,6 +37,11 @@ h6 {
     color: #aba69a;
 }
 
+.sidebar-footer {
+    background: rgba(31, 31, 29, 0.94);
+    border-top-color: #31312d;
+}
+
 .sidebar-title {
     color: #f8f8f3;
 }

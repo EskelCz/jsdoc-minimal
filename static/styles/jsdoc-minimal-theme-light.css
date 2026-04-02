@@ -37,6 +37,11 @@ body.light {
     color: #4f4a40;
 }
 
+.light .sidebar-footer {
+    background: rgba(246, 244, 238, 0.94);
+    border-top-color: #e4ddcf;
+}
+
 .light .sidebar-title {
     color: #161616;
 }
