@@ -1,8 +1,10 @@
 <?js if (this.project !== undefined) { ?>
   <div class="gh-meta">
-  <p><b>Version</b> <?js= this.project.version || "1.0.0" ?></p>
-  <p>
-    <a href="<?js= this.project.repo ?>" title="View project on GitHub" aria-hidden="true"><span class="fa fa-github"></span></a>
+  <p class="project-version">Version <?js= this.project.version || "1.0.0" ?></p>
+  <?js if (this.project.repo) { ?>
+  <p class="project-link">
+    <a href="<?js= this.project.repo ?>" title="View project on GitHub" aria-label="View project on GitHub"><span class="fa fa-github"></span></a>
   </p>
+  <?js } ?>
   </div>
 <?js } ?>

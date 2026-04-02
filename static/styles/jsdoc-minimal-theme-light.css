@@ -4,19 +4,19 @@
 }
 
 body.light {
-    background-color: #fff;
-    color: #111;
+    background-color: #fcfcfa;
+    color: #181818;
 }
 
 .light a,
 .light a:active,
 .light a:focus {
-    color: #008b8b;
+    color: #16615b;
     font-weight: 700;
 }
 
 .light .gh-meta p~p a:hover {
-    color: #008b8b;
+    color: #16615b;
 }
 
 .name a, .details-item-container a {
@@ -33,55 +33,68 @@ body.light {
 .light h4,
 .light h5,
 .light h6 {
-    color: #111;
+    color: #161616;
 }
 
 .light .sidebar {
-    background-color: #f7f7f7;
-    color: #222;
+    background-color: #f6f4ee;
+    border: 1px solid #ebe6d8;
+    color: #4f4a40;
 }
 
 .light .sidebar-title {
-    color: #222;
+    color: #161616;
+}
+
+.light .project-version {
+    color: #7e786a;
+}
+
+.light .project-link a {
+    color: #8a8477;
+}
+
+.light .project-link a:hover {
+    color: #5f5a50;
 }
 
 .light .sidebar-section-title {
-    color: #222;
+    color: #7b7568;
 }
 
 .light .sidebar-section-title:hover,
 .light .sidebar-section-title.active {
-    background: #eee;
+    background: #ece7da;
 }
 
 .light .with-arrow {
-    fill: #111;
+    fill: #7b7568;
 }
 
 .light .sidebar-section-children-container {
-    background: #eee;
+    background: transparent;
 }
 
 .light .sidebar-section-children.active {
-    background: #ccc;
+    background: #e8e1d2;
 }
 
 .light .sidebar-section-children a:hover {
-    background: #e0e0e0;
+    background: #efeadf;
 }
 
 .light .sidebar-section-children a {
-    color: #111;
+    color: #24211d;
 }
 
 .light .navbar-container {
-    background: #fff;
+    background: rgba(252, 252, 250, 0.9);
 }
 
 .light .icon-button svg,
 .light .navbar-item a {
-    color: #222;
-    fill: #222;
+    color: #3d3a33;
+    fill: #3d3a33;
 }
 
 .light .tippy-box {
@@ -102,35 +115,35 @@ body.light {
 }
 
 .light .icon-button:hover {
-    background: #ddd;
+    background: #ece7da;
 }
 
 .light .icon-button:active {
-    background: #ccc;
+    background: #e0dacb;
 }
 
 .light .navbar-item a:active {
-    background-color: #eee;
-    color: #333;
+    background-color: #f1ede4;
+    color: #2f2b25;
 }
 
 .light .navbar-item:hover {
-    background: #f7f7f7;
+    background: #f4f1e8;
 }
 
 .light .footer {
-    background: #f7f7f7;
-    color: #111;
+    background: #f6f4ee;
+    color: #3d3a33;
 }
 
 .light .toc-link {
-    color: #999;
+    color: #8a8477;
     font-size: 0.875rem;
     transition: color 0.3s;
 }
 
 .light .toc-link.is-active-link {
-    color: #111;
+    color: #1b1b1b;
 }
 
 .light .has-anchor .link-anchor {
@@ -142,15 +155,15 @@ body.light {
 }
 
 .light .signature-attributes {
-    color: #aaa;
+    color: #908a7e;
 }
 
 .light .ancestors {
-    color: #999;
+    color: #8a8477;
 }
 
 .light .ancestors a {
-    color: #999 !important;
+    color: #8a8477 !important;
 }
 
 .light .important {
@@ -158,17 +171,22 @@ body.light {
 }
 
 .light .type-signature {
-    color: #00918e;
+    color: #14756d;
 }
 
 .light .name,
 .light .name a {
-    color: #293a80;
+    color: #1c2b57;
 }
 
 .light .details {
-    background: #f9f9f9;
-    color: #101010;
+    background: #fbfaf6;
+    border: 1px solid #e8e2d5;
+    color: #111;
+}
+
+.light .details .details-item-container + .details-item-container {
+    border-top: 1px solid #ece6da;
 }
 
 .light .details a {
@@ -181,11 +199,11 @@ body.light {
 }
 
 .light .prettyprint {
-    background: #f7f7f7;
+    background: #f6f4ee;
 }
 
 .light .pre-div {
-    background: #f7f7f7;
+    background: #f6f4ee;
 }
 
 /* stylelint-disable */
@@ -196,11 +214,12 @@ body.light {
 
 /* stylelint-enable */
 .light .hljs .selected {
-    background: #ccc;
+    background: #d8d1c2;
 }
 
 .light table.hljs-ln td {
     background: none;
+    border-top: 0;
 }
 
 .light .hljs .selected .hljs-ln-numbers {
@@ -208,7 +227,7 @@ body.light {
 }
 
 .light .pre-top-bar-container {
-    background-color: #eee;
+    background-color: #ece7da;
 }
 
 .light .prettyprint.source,
@@ -220,26 +239,36 @@ body.light {
 .light .params .name,
 .light .props .name,
 .light .name code {
-    color: #4d4e53;
+    color: #2b2b2b;
+}
+
+.light table,
+.light .params,
+.light .props {
+    background: #fbfaf6;
+    border: 1px solid #e5dfd2;
 }
 
 .light table td,
-.light .params td {
-    background: #f7f7f7;
+.light .params td,
+.light .props td {
+    background: transparent;
+    border-top: 1px solid #ece6da;
 }
 
 .light table thead th,
 .light .params thead th,
 .light .props thead th {
-    background-color: #eee;
-    color: #111;
+    background-color: #f1ede3;
+    border-bottom: 1px solid #e5dfd2;
+    color: #5b554a;
 }
 
 .light table .params thead tr,
 .light .params .params thead tr,
 .light .props .props thead tr {
-    background-color: #eee;
-    color: #111;
+    background-color: #f1ede3;
+    color: #5b554a;
 }
 
 .light .disabled {
@@ -256,8 +285,8 @@ body.light {
 }
 
 .light blockquote {
-    background: #eee;
-    color: #111;
+    background: #f4f0e6;
+    color: #1a1a1a;
 }
 
 .light code {

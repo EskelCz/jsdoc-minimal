@@ -6,8 +6,10 @@
 
 <div id="mobile-sidebar" class="mobile-sidebar-container">
     <div class="mobile-sidebar-wrapper">
-        <?js= this.partial('sidebar-github.tmpl')?>
-        <?js= this.partial('sidebar-title.tmpl') ?>
+        <div class="sidebar-header">
+            <?js= this.partial('sidebar-title.tmpl') ?>
+            <?js= this.partial('sidebar-github.tmpl')?>
+        </div>
         <div class="mobile-nav-links">
             <?js= this.partial('navbar-menu.tmpl', '-mobile') ?>
         </div>

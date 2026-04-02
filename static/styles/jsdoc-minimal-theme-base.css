@@ -1,11 +1,4 @@
-@font-face {
-    font-family: 'heading';
-    src: url('../fonts/Quicksand-SemiBold.eot');
-    src: url('../fonts/Quicksand-SemiBold.eot?#iefix') format('embedded-opentype'), url('../fonts/Quicksand-SemiBold.woff2') format('woff2'), url('../fonts/Quicksand-SemiBold.woff') format('woff'), url('../fonts/Quicksand-SemiBold.ttf') format('truetype'), url('../fonts/Quicksand-SemiBold.svg#Quicksand-SemiBold') format('svg');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap');
 
 @font-face {
     font-family: 'body';
@@ -26,7 +19,12 @@
 }
 
 :root {
-    --outer-wrapper-max-width: 65rem;
+    --outer-wrapper-max-width: 68rem;
+    --sidebar-width: 19rem;
+    --toc-width: 13rem;
+    --toc-offset: 2rem;
+    --layout-gutter: 1.25rem;
+    --content-inline-padding: 3rem;
 }
 
 * {
@@ -37,7 +35,7 @@
 
 html,
 body {
-    line-height: 1.75;
+    line-height: 1.7;
     min-height: 100%;
     width: 100%;
 }
@@ -50,7 +48,7 @@ body {
 
 strong,
 b {
-    font-family: heading;
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
 }
 
 h1,
@@ -59,23 +57,28 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'heading';
-    font-weight: 400;
-    line-height: 1.75
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 500;
+    line-height: 1.18;
 }
 
 h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2.75rem, 2.4rem + 1.2vw, 3.5rem);
     margin: 0;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
 }
 
 h2 {
-    font-size: 2.25rem;
-    margin: 2rem 0 0;
+    font-size: clamp(1.6rem, 1.45rem + 0.5vw, 1.95rem);
+    margin: 3rem 0 0.75rem;
+    letter-spacing: -0.01em;
 }
 
 h3 {
-    font-size: 1.5rem;
+    font-size: 1.125rem;
+    margin: 2.5rem 0 0.75rem;
+    letter-spacing: 0.01em;
 }
 
 h4 {
@@ -109,7 +112,7 @@ a img {
 }
 
 p {
-    margin: 1rem 0;
+    margin: 0.875rem 0;
 }
 
 article ul {
@@ -185,33 +188,38 @@ article ol {
 
 blockquote {
     font-size: 0.875rem;
-    padding: 0.0625rem 1.25rem;
+    padding: 0.75rem 1.25rem;
     border-radius: 1rem;
-    margin: 0.5rem 0;
+    margin: 1rem 0;
 }
 
 .details {
     border-radius: 1rem;
-    margin: 1rem 0
+    margin: 1.25rem 0 1.75rem;
+    overflow: hidden
 }
 
 .details .details-item-container {
-    display: flex;
-    padding: 1rem 2rem
+    align-items: start;
+    display: grid;
+    gap: 0.75rem 1.5rem;
+    grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr);
+    padding: 0.95rem 1.25rem
 }
 
 dt {
-    font-family: heading
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif
 }
 
 .details dt {
-    float: left;
-    min-width: 11rem
+    float: none;
+    min-width: 0
 }
 
 .details ul {
     margin: 0;
     display: inline-flex;
+    flex-wrap: wrap;
     list-style-type: none
 }
 
@@ -235,7 +243,8 @@ dt {
 }
 
 .description {
-    margin-bottom: 2rem
+    margin-bottom: 1.5rem;
+    max-width: 72ch
 }
 
 .method-member-container table {
@@ -288,49 +297,66 @@ pre.prettyprint {
 }
 
 h4.name {
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+h3.name,
+h4.name {
+    font-size: clamp(1.45rem, 1.3rem + 0.7vw, 1.95rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.35;
 }
 
 .params,
 .props,
 table {
     border-collapse: separate;
-    border-spacing: 0 0.5rem;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    margin: 0;
+    border-spacing: 0;
+    border-radius: 1rem;
+    font-size: 0.9375rem;
+    margin: 0.75rem 0 0;
+    overflow: hidden;
     width: 100%;
 }
 
 table td:first-child,
 .params td:first-child,
+.props td:first-child,
 table thead th:first-child,
 .params thead th:first-child,
-.props thead th:first-child {
+.props thead th:first-child,
+table tbody tr:last-child td:first-child,
+.params tbody tr:last-child td:first-child,
+.props tbody tr:last-child td:first-child {
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
 }
 
 table td:last-child,
 .params td:last-child,
+.props td:last-child,
 table thead th:last-child,
 .params thead th:last-child,
-.props thead th:last-child {
+.props thead th:last-child,
+table tbody tr:last-child td:last-child,
+.params tbody tr:last-child td:last-child,
+.props tbody tr:last-child td:last-child {
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
 }
 
 table th,
-.params th {
-    position: sticky;
-    top: 0;
+.params th,
+.props th {
+    position: static;
 }
 
 .params .name,
 .props .name,
 .name code {
     font-family: 'code';
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .params td,
@@ -350,12 +376,27 @@ th {
 .props th,
 th,
 td {
-    padding: 1rem 1.125rem;
+    padding: 0.95rem 1.125rem;
 }
 
 .params thead tr,
 .props thead tr {
     font-weight: 700
+}
+
+table thead th,
+.params thead th,
+.props thead th {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+table tbody td,
+.params tbody td,
+.props tbody td {
+    vertical-align: middle;
 }
 
 /* stylelint-disable */
@@ -427,46 +468,95 @@ code {
     bottom: 0;
     display: flex;
     left: 0;
-    padding: 1rem;
+    padding: var(--layout-gutter);
     position: fixed;
     top: 0;
-    width: 25rem;
+    width: var(--sidebar-width);
     z-index: 10;
 }
 
 .sidebar {
-    border-radius: 1rem;
+    border-radius: 1.25rem;
     flex: 1;
-    padding: 1.5rem 0;
+    padding: 1.5rem 0 1rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    gap: 1rem;
+}
+
+.sidebar-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
 }
 
 .sidebar-title {
     margin: 0;
-    padding: 0 2rem;
-    text-align: center;
+    padding: 0 1.5rem;
+    text-align: left;
     text-decoration: none;
-    font-size: 1.5rem;
-    font-family: 'heading';
+    font-size: clamp(1.75rem, 1.5rem + 0.4vw, 2rem);
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
 }
 
 .sidebar-title:hover {
     text-decoration: none;
 }
 
+.sidebar-title-anchor {
+    display: block;
+}
+
+.gh-meta {
+    align-items: center;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0 1.5rem;
+}
+
+.gh-meta p {
+    margin: 0;
+}
+
+.project-version {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.project-link a {
+    align-items: center;
+    border-radius: 999px;
+    display: inline-flex;
+    height: 1.5rem;
+    justify-content: center;
+    width: 1.5rem;
+}
+
+.project-link .fa.fa-github {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
 .sidebar-items-container {
     flex: 1;
     overflow: auto;
+    padding: 0 0.75rem;
     position: relative;
 }
 
 .sidebar-section-title {
-    border-radius: 1rem;
-    font-family: heading;
-    font-size: 1.25rem;
-    padding: 0.5rem 2rem;
+    border-radius: 0.875rem;
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 0.75rem;
+    text-transform: uppercase;
 }
 
 .with-arrow {
@@ -490,13 +580,15 @@ code {
 }
 
 .sidebar-section-children-container {
-    border-radius: 0.5rem;
+    border-radius: 0.875rem;
+    margin-bottom: 0.5rem;
     overflow: hidden;
 }
 
 .sidebar-section-children a {
     display: block;
-    padding: 0.25rem 2rem;
+    border-radius: 0.75rem;
+    padding: 0.45rem 0.75rem;
     width: 100%;
 }
 
@@ -516,9 +608,9 @@ code {
 .toc-container {
     bottom: 0;
     position: fixed;
-    right: 4rem;
+    right: var(--toc-offset);
     top: 0;
-    width: 16rem;
+    width: var(--toc-width);
     z-index: 10;
 }
 
@@ -526,7 +618,7 @@ code {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding-top: 10rem;
+    padding-top: 8rem;
 }
 
 #eed4d2a0bfd64539bb9df78095dec881 {
@@ -549,7 +641,7 @@ code {
 }
 
 .toc-link.is-active-link {
-    font-family: heading;
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
 }
 
 .has-anchor {
@@ -575,12 +667,12 @@ code {
 
 .navbar-container {
     display: flex;
-    height: 7rem;
+    height: 6rem;
     justify-content: center;
-    left: 25rem;
-    padding-top: 1rem;
+    left: calc(var(--sidebar-width) + 0.5rem);
+    padding-top: 0.75rem;
     position: fixed;
-    right: 25rem;
+    right: calc(var(--toc-width) + var(--toc-offset) + 2rem);
     top: 0;
     z-index: 10;
 }
@@ -589,7 +681,7 @@ code {
     display: flex;
     flex: 1;
     max-width: var(--outer-wrapper-max-width);
-    padding: 1rem 4rem 1rem 2rem;
+    padding: 1rem var(--content-inline-padding) 1rem 1.5rem;
 }
 
 .navbar-left-items {
@@ -653,12 +745,12 @@ code {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 7rem 25rem 0;
+    padding: 6rem calc(var(--toc-width) + var(--toc-offset) + 2rem) 0 calc(var(--sidebar-width) + 1rem);
 }
 
 .main-wrapper {
     max-width: var(--outer-wrapper-max-width);
-    padding: 0 4rem 1rem;
+    padding: 0 var(--content-inline-padding) 2rem;
     width: 100%;
 }
 
@@ -668,7 +760,7 @@ code {
 
 .footer {
     width: 100%;
-    margin: 5rem 0 0 0;
+    margin: 4rem 0 0 0;
     border-radius: 1rem;
     font-size: 0.875rem;
     display: flex;
@@ -771,7 +863,7 @@ pre {
 }
 
 .bold {
-    font-family: heading;
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
 }
 
 .search-container {
@@ -790,7 +882,7 @@ pre {
     max-width: 60rem;
     padding: 4rem 2rem 2rem;
     border-radius: 1rem;
-    margin: 3rem 25rem;
+    margin: 3rem calc(var(--toc-width) + var(--toc-offset) + 2rem) 0 calc(var(--sidebar-width) + 1rem);
     position: relative
 }
 
@@ -856,7 +948,7 @@ pre {
 
 /* stylelint-enable */
 .search-result-item-title {
-    font-family: heading;
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
     font-size: 1.5rem;
     margin: 0;
 }
@@ -885,7 +977,7 @@ pre {
     right: 0;
     left: 0;
     bottom: 0;
-    padding: 1rem;
+    padding: 1.25rem;
     z-index: 25;
     display: none;
 }
@@ -895,12 +987,12 @@ pre {
 }
 
 .mobile-sidebar-wrapper {
-    border-radius: 1rem;
+    border-radius: 1.25rem;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 2rem;
+    padding-top: 1.5rem;
 }
 
 .mobile-nav-links {
@@ -925,11 +1017,11 @@ pre {
 
 @media screen and (max-width: 100em) {
     .main-content {
-        padding: 7rem 0 0 25rem
+        padding: 6rem 1rem 0 calc(var(--sidebar-width) + 1rem)
     }
 
     .search-container .wrapper {
-        margin-right: 1rem
+        margin: 2rem 1rem 0 calc(var(--sidebar-width) + 1rem)
     }
 
     .navbar-container {
@@ -945,15 +1037,15 @@ pre {
 
 @media screen and (max-width:65em) {
     h1 {
-        font-size: 3rem
+        font-size: 2.5rem
     }
 
     h2 {
-        font-size: 2rem
+        font-size: 1.5rem
     }
 
     h3 {
-        font-size: 1.875
+        font-size: 1.125rem
     }
 
     h4,
@@ -963,7 +1055,7 @@ pre {
     }
 
     .main-wrapper {
-        padding: 0 1rem 1rem
+        padding: 0 1rem 1.5rem
     }
 
     .search-result-c {
@@ -984,6 +1076,7 @@ pre {
 
     .main-content {
         padding-left: 0;
+        padding-right: 0;
         padding-top: 1rem
     }
 
@@ -994,6 +1087,10 @@ pre {
     .source-page + .footer,
     .footer {
         margin-top: 2rem
+    }
+
+    .details .details-item-container {
+        grid-template-columns: 1fr;
     }
 
     .has-anchor:hover .link-anchor {
@@ -1085,16 +1182,11 @@ ol.see-links {
 }
 
 .gh-meta {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    margin: 0 0 1rem;
+    margin: 0;
 }
 
 .gh-meta p {
     overflow-x: inherit;
-    padding: 0 0.75em;
-    width: inherit;
 }
 
 .gh-meta p~p a {
