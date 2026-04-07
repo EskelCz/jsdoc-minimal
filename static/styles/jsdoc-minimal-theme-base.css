@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap');
 
 @font-face {
-    font-family: 'body';
+    font-family: 'Nunito Regular';
     src: url('../fonts/Nunito-Regular.eot');
     src: url('../fonts/Nunito-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/Nunito-Regular.woff2') format('woff2'), url('../fonts/Nunito-Regular.woff') format('woff'), url('../fonts/Nunito-Regular.ttf') format('truetype'), url('../fonts/Nunito-Regular.svg#Nunito-Regular') format('svg');
     font-weight: normal;
@@ -10,7 +10,7 @@
 }
 
 @font-face {
-    font-family: 'code';
+    font-family: 'Source Code Pro Regular';
     src: url('../fonts/SourceCodePro-Regular.eot');
     src: url('../fonts/SourceCodePro-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/SourceCodePro-Regular.woff2') format('woff2'), url('../fonts/SourceCodePro-Regular.woff') format('woff'), url('../fonts/SourceCodePro-Regular.ttf') format('truetype'), url('../fonts/SourceCodePro-Regular.svg#SourceCodePro-Regular') format('svg');
     font-weight: normal;
@@ -41,22 +41,16 @@ body {
 }
 
 body {
-    font-family: 'body';
+    font-family: 'Nunito Regular', sans-serif;
     overflow-x: hidden;
     position: relative;
 }
 
-strong,
-b {
+strong, b {
     font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
     font-weight: 500;
     line-height: 1.18;
@@ -392,7 +386,7 @@ table th,
 .params .name,
 .props .name,
 .name code {
-    font-family: 'code';
+    font-family: 'Source Code Pro Regular';
     font-size: 0.95rem;
 }
 
@@ -467,13 +461,13 @@ dl.param-type {
 }
 
 .param-type dd {
-    font-family: 'code';
+    font-family: 'Source Code Pro Regular';
     font-size: 1rem;
 }
 
 code {
     border-radius: 0.3rem;
-    font-family: 'code';
+    font-family: 'Source Code Pro Regular';
     font-size: 1rem;
     padding: 0.1rem 0.4rem;
 }
@@ -901,7 +895,7 @@ pre {
 }
 
 .code-lang-name {
-    font-family: 'body';
+    font-family: 'Nunito Regular', sans-serif;
     font-size: 0.75rem;
 }
 
