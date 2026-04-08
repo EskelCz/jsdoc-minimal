@@ -35,13 +35,13 @@
 
 html,
 body {
+    font-family: 'Nunito Regular', sans-serif;
     line-height: 1.7;
     min-height: 100%;
     width: 100%;
 }
 
 body {
-    font-family: 'Nunito Regular', sans-serif;
     overflow-x: hidden;
     position: relative;
 }
@@ -115,7 +115,7 @@ article ul {
 
 article ul li,
 article ol:not(.linenums) li {
-    padding: .5rem 0
+    padding: .5rem 0;
 }
 
 article ol,
@@ -125,7 +125,7 @@ article ul {
 
 article ol p,
 article ul p {
-    margin: 0
+    margin: 0;
 }
 
 article ul,
@@ -147,35 +147,29 @@ article ol:not(.linenums) li {
     padding: 0.5rem 0;
 }
 
-/*
-article ol {
-    padding-left: 1rem;
-}
-*/
-
 .variation {
-    display: none
+    display: none;
 }
 
 .signature-attributes {
     font-style: italic;
-    font-weight: lighter
+    font-weight: lighter;
 }
 
 .ancestors a {
-    text-decoration: none
+    text-decoration: none;
 }
 
 .important {
-    font-weight: 700
+    font-weight: 700;
 }
 
 .signature {
-    font-family: "code"
+    font-family: 'Source Code Pro Regular';
 }
 
 .name {
-    font-family: "code";
+    font-family: 'Source Code Pro Regular';
     font-size: 110%;
     font-weight: 700
 }
@@ -190,7 +184,7 @@ blockquote {
 .details {
     border-radius: 1rem;
     margin: 1.25rem 0 1.75rem;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .details .details-item-container {
@@ -198,51 +192,51 @@ blockquote {
     display: grid;
     gap: 0.75rem 1.5rem;
     grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr);
-    padding: 0.95rem 1.25rem
+    padding: 0.95rem 1.25rem;
 }
 
 dt {
-    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
 }
 
 .details dt {
     float: none;
-    min-width: 0
+    min-width: 0;
 }
 
 .details ul {
     margin: 0;
     display: inline-flex;
     flex-wrap: wrap;
-    list-style-type: none
+    list-style-type: none;
 }
 
 .details ul li {
     display: inline-flex;
     margin-right: .6125rem;
     padding: 0;
-    word-break: break-word
+    word-break: break-word;
 }
 
 .details ul li p {
-    margin: 0
+    margin: 0;
 }
 
 .details pre.prettyprint {
-    margin: 0
+    margin: 0;
 }
 
 .details .object-value {
-    padding-top: 0
+    padding-top: 0;
 }
 
 .description {
     margin-bottom: 1.5rem;
-    max-width: 72ch
+    max-width: 72ch;
 }
 
 .method-member-container table {
-    margin-top: 1rem
+    margin-top: 1rem;
 }
 
 .methods-list .method-entry {
@@ -261,7 +255,7 @@ dt {
 }
 
 .pre-div .hljs-ln {
-    margin: 0
+    margin: 0;
 }
 
 .code-caption {
@@ -285,7 +279,7 @@ pre.prettyprint {
     display: block;
     font-size: 0.875rem;
     line-height: 1.25rem;
-    padding: 1rem
+    padding: 1rem;
 }
 
 .prettyprint.linenums li {
@@ -398,7 +392,7 @@ th {
     display: table-cell;
     margin: 0;
     text-align: left;
-    vertical-align: top
+    vertical-align: top;
 }
 
 .params th,
@@ -412,7 +406,7 @@ td {
 
 .params thead tr,
 .props thead tr {
-    font-weight: 700
+    font-weight: 700;
 }
 
 table thead th,
@@ -433,7 +427,7 @@ table tbody td,
 /* stylelint-disable */
 .params .params thead tr,
 .props .props thead tr {
-    font-weight: 700
+    font-weight: 700;
 }
 
 .params td.description > p:first-child,
