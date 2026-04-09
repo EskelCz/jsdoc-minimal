@@ -10,6 +10,13 @@ var self = this;
 
     <h3 class="name has-anchor" id="<?js= id ?>">
         <?js= data.attribs + (kind === 'class' ? 'new ' : '') + name + (data.signature || '') ?>
+        <?js if (data.visibilityTags && data.visibilityTags.length) { ?>
+            <span class="method-visibility-tags" aria-label="Method visibility tags">
+                <?js data.visibilityTags.forEach(function(tag) { ?>
+                    <span class="method-visibility-tag method-visibility-tag-<?js= tag ?>">@<?js= tag ?></span>
+                <?js }); ?>
+            </span>
+        <?js } ?>
     </h3>
 
     <?js if (data.summary) { ?>

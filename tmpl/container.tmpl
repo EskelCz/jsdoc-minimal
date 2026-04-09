@@ -155,6 +155,7 @@
 
     <?js
         var methods = self.find({kind: 'function', memberof: isGlobalPage ? {isUndefined: true} : doc.longname});
+        methods = self.sortMethodsForDisplay(methods);
         if (methods && methods.length && methods.forEach) {
     ?>
         <h2 id="methods" class="subsection-title has-anchor">Methods</h2>

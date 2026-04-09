@@ -247,6 +247,68 @@ function addAttribs(f) {
     f.attribs = `<span class="type-signature">${attribsString}</span>`;
 }
 
+function hasDocletTag(doclet, tagName) {
+    if (!doclet || !tagName) {
+        return false;
+    }
+
+    const normalizedTagName = String(tagName).trim().toLowerCase();
+    const tags = Array.isArray(doclet.tags) ? doclet.tags : [];
+    const hasExplicitTag = tags.some(tag =>
+        tag &&
+        typeof tag.title === 'string' &&
+        tag.title.toLowerCase() === normalizedTagName
+    );
+
+    if (hasExplicitTag) {
+        return true;
+    }
+
+    if (typeof doclet.comment !== 'string') {
+        return false;
+    }
+
+    const tagMatcher = new RegExp(`(?:^|\\s)@${normalizedTagName}(?=\\s|$)`, 'u');
+
+    return tagMatcher.test(doclet.comment);
+}
+
+function getMethodVisibilityTags(doclet) {
+    const visibilityTags = [];
+    const isPublic = doclet && doclet.access === 'public' || hasDocletTag(doclet, 'public');
+    const isInternal = hasDocletTag(doclet, 'internal');
+
+    if (isPublic) {
+        visibilityTags.push('public');
+    }
+
+    if (isInternal) {
+        visibilityTags.push('internal');
+    }
+
+    return {
+        visibilityTags,
+        isPublic
+    };
+}
+
+function sortMethodsForDisplay(methods) {
+    if (!Array.isArray(methods) || methods.length <= 1) {
+        return methods;
+    }
+
+    return methods.slice().sort((left, right) => {
+        const leftIsPublic = Boolean(left && left.isPublicMethod);
+        const rightIsPublic = Boolean(right && right.isPublicMethod);
+
+        if (leftIsPublic === rightIsPublic) {
+            return 0;
+        }
+
+        return leftIsPublic ? -1 : 1;
+    });
+}
+
 function shortenPaths(files, commonPrefix) {
     Object.keys(files).forEach(file => {
         files[file].shortened = files[file].resolved.replace(commonPrefix, '')
@@ -964,6 +1026,13 @@ exports.publish = function(taffyData, opts, tutorials) {
             addSignatureReturns(doclet);
             addAttribs(doclet);
         }
+
+        if (doclet.kind === 'function') {
+            const methodVisibility = getMethodVisibilityTags(doclet);
+
+            doclet.visibilityTags = methodVisibility.visibilityTags;
+            doclet.isPublicMethod = methodVisibility.isPublic;
+        }
     });
 
     // do this after the urls have all been generated
@@ -1012,6 +1081,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     view.navbar = buildNavbar();
     view.codepen = codepen(themeOpts);
     view.baseURL = getBaseURL(themeOpts);
+    view.sortMethodsForDisplay = sortMethodsForDisplay;
     attachModuleSymbols(find({ 'longname': { 'left': 'module:' } }), members.modules);
 
     if (themeOpts.modulePrefix) {
