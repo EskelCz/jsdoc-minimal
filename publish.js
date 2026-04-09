@@ -1073,6 +1073,14 @@ exports.publish = function(taffyData, opts, tutorials) {
     view.staticStyles = staticStyles;
     view.meta = getMetaTagData(themeOpts);
     view.project = themeOpts.project || undefined;
+    if (view.project && !view.project.version) {
+        try {
+            const pkg = JSON.parse(require('fs').readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'));
+            view.project.version = pkg.version;
+        } catch (e) {
+            logger.warn('Could not read version from package.json: ' + e.message);
+        }
+    }
     view.overlayScrollbar = overlayScrollbarOptions(themeOpts, outdir);
     view.theme = getTheme(themeOpts);
     view.layoutOptions = getLayoutOptions(themeOpts, defaultOpts, outdir);
