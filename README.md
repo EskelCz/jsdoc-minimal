@@ -1,15 +1,5 @@
 # jsdoc-minimal
 
-<div align="center">
-
-[![Package Workflow][]][Package]
-[![Chrome, Firefox, Safari on macOS Workflow][]][Chrome, Firefox, Safari on macOS]
-[![Chrome on Android, Safari on iOS Workflow][]][Chrome on Android, Safari on iOS]
-[![Current Release][]][Releases]
-</div>
-
-<hr/>
-
 ## Contents
 
 - [Installation](#installation)
